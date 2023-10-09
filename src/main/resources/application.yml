@@ -1,0 +1,13 @@
+server:
+  port: 9001
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:localhost}:3306/${DB_NAME:wallet}
+    username: ${DB_USER:ray}
+    password: ${DB_PASSWORD:wasd2333}
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: update
