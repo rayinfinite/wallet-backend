@@ -1,4 +1,4 @@
-package com.github.rayinfinite.wallet.model.transaction.dto;
+package com.github.rayinfinite.wallet.model.transaction;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

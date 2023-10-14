@@ -17,7 +17,7 @@ public class UserBookRelation {
     @NotNull
     private User user;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @NotNull
     private Book book;
 

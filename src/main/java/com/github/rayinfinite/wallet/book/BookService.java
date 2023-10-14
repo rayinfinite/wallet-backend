@@ -1,15 +1,11 @@
 package com.github.rayinfinite.wallet.book;
 
 import com.github.rayinfinite.wallet.UserBookRelation.UserBookRelationService;
-import com.github.rayinfinite.wallet.account.AccountService;
 import com.github.rayinfinite.wallet.exception.DefaultException;
 import com.github.rayinfinite.wallet.model.CurrentSession;
 import com.github.rayinfinite.wallet.model.UserBookRelation;
-import com.github.rayinfinite.wallet.model.account.Account;
-import com.github.rayinfinite.wallet.model.account.dto.AddAccount;
 import com.github.rayinfinite.wallet.model.book.Book;
-import com.github.rayinfinite.wallet.model.book.dto.AddBook;
-import com.github.rayinfinite.wallet.model.book.dto.UpdateBook;
+import com.github.rayinfinite.wallet.model.book.AddBook;
 import com.github.rayinfinite.wallet.model.user.User;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -43,9 +39,9 @@ public class BookService {
     }
 
     @Transactional
-    public void update(UpdateBook updateBook) {
-        Book book = get(updateBook.getId(), new int[]{0, 1, 2});
-        BeanUtils.copyProperties(updateBook, book);
+    public void update(long id,AddBook addBook) {
+        Book book = get(id, new int[]{0, 1, 2});
+        BeanUtils.copyProperties(addBook, book);
         bookRepository.save(book);
     }
 
@@ -54,7 +50,8 @@ public class BookService {
         return get(id, new int[]{0, 1, 2, 3});
     }
 
-    public List<Book> list(User user) {
+    public List<Book> list(){
+        User user=currentSession.getUser();
         return userBookRelationService.findByUser(user).stream().map(UserBookRelation::getBook).toList();
     }
 
@@ -79,9 +76,9 @@ public class BookService {
         throw new DefaultException("没有操作权限");
     }
 
-    public Book setDefaultAccount(Account account){
+    public Book setDefaultAccount(long defaultAccountId){
         Book book=currentSession.getBook();
-        book.setDefaultAccount(account);
+        book.setDefaultAccount(defaultAccountId);
         return bookRepository.save(book);
     }
 }

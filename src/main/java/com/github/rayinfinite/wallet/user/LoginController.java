@@ -27,11 +27,10 @@ public class LoginController {
 
     @Operation(description = "Login")
     @PostMapping("/login")
-    public BaseResponse<User> login(@Validated @RequestBody Login login) {
+    public BaseResponse<String> login(@Validated @RequestBody Login login) {
         User user = userService.login(login);
         String token = jwtConfig.createToken(user.getId());
-        request.getSession().setAttribute("accessToken", token);
-        return BaseResponse.success(user);
+        return BaseResponse.success(token);
     }
 
     @Operation(description = "Logout")
@@ -43,14 +42,13 @@ public class LoginController {
 
     @Operation(description = "Register")
     @PostMapping("/login/register")
-    public BaseResponse<User> register(@Validated @RequestBody AddUser addUser) {
+    public BaseResponse<String> register(@Validated @RequestBody AddUser addUser) {
         User user = userService.register(addUser);
         if (user == null) {
             return BaseResponse.error("User already exists");
         }
         String token = jwtConfig.createToken(user.getId());
-        request.getSession().setAttribute("accessToken", token);
-        return BaseResponse.success(user);
+        return BaseResponse.success(token);
     }
 
     @Operation(description = "Forget Password")

@@ -5,8 +5,7 @@ import com.github.rayinfinite.wallet.model.CurrentSession;
 import com.github.rayinfinite.wallet.model.account.Account;
 import com.github.rayinfinite.wallet.model.book.Book;
 import com.github.rayinfinite.wallet.model.transaction.Transaction;
-import com.github.rayinfinite.wallet.model.transaction.dto.AddTransaction;
-import com.github.rayinfinite.wallet.model.transaction.dto.UpdateTransaction;
+import com.github.rayinfinite.wallet.model.transaction.AddTransaction;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -16,8 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -28,10 +25,10 @@ public class TransactionService {
 
     public Transaction get(Long id) {
         Transaction transaction = transactionRepository.findById(id).orElse(null);
-        if(transaction == null) {
+        if (transaction == null) {
             throw new RuntimeException("Transaction not found");
         }
-        if(!currentSession.getBook().equals(transaction.getBook())) {
+        if (!currentSession.getBook().equals(transaction.getBook())) {
             throw new RuntimeException("No Authority");
         }
         return transaction;
@@ -45,30 +42,24 @@ public class TransactionService {
         BeanUtils.copyProperties(addTransaction, transaction);
         transaction.setBook(currentSession.getBook());
         transaction.setAccount(account);
-        Map<String, Object> details = new HashMap<>();
-        if (addTransaction.getNotes() != null) {
-            details.put("notes", addTransaction.getNotes());
-        }
-        transaction.setDetails(details);
+//        Map<String, Object> details = new HashMap<>();
+//        transaction.setDetails(details);
     }
 
     /**
      * 更新Transaction
      *
-     * @param updateTransaction 找本身存在的Transaction，判断在同一个账本上，更新Transaction
+     * @param addTransaction 找本身存在的Transaction，判断在同一个账本上，更新Transaction
      */
     @Transactional
-    public void update(UpdateTransaction updateTransaction) {
-        Transaction Transaction = transactionRepository.findById(updateTransaction.getId()).orElse(null);
-        if (Transaction == null) {
-            throw new RuntimeException("Transaction not found");
-        }
-        Account account = accountService.get(updateTransaction.getAccountId());
+    public void update(long id, AddTransaction addTransaction) {
+        Transaction Transaction = get(id);
+        Account account = accountService.get(addTransaction.getAccountId());
         Book book = checkAccount(account);
         if (!book.equals(Transaction.getBook())) {
             throw new RuntimeException("Book has been changed");
         }
-        BeanUtils.copyProperties(updateTransaction, Transaction);
+        BeanUtils.copyProperties(addTransaction, Transaction);
         Transaction.setUpdateTime(LocalDateTime.now());
         transactionRepository.save(Transaction);
     }
@@ -92,10 +83,10 @@ public class TransactionService {
 
     }
 
-    public Page<Transaction> getPage(int page, int size, long startTimeMillis, long endTimeMillis) {
+    public Page<Transaction> getPage(int page, int size, LocalDateTime from, LocalDateTime end) {
         Book book = currentSession.getBook();
         Pageable pageable = PageRequest.of(page, size);
-        return transactionRepository.findByBookIdAndTimeBetween(book.getId(), startTimeMillis, endTimeMillis, pageable);
+        return transactionRepository.findByBookIdAndTimeBetween(book.getId(), from, end, pageable);
     }
 
 

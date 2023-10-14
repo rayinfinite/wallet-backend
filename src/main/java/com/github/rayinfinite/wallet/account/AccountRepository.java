@@ -6,5 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
-    Page<Account> findByName(String keyword, Pageable pageable);
+    Page<Account> findByNameContainingAndBookId(String name, Long bookId, Pageable pageable);
+    Page<Account> findByBookId(Long bookId, Pageable pageable);
 }

@@ -5,9 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDateTime;
+
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
     Page<Transaction> findByBookId(Long bookId, Pageable pageable);
 
-    Page<Transaction> findByBookIdAndTimeBetween(Long bookId, long startTimeMillis, long endTimeMillis,
+    Page<Transaction> findByBookIdAndTimeBetween(Long book_id, LocalDateTime from, LocalDateTime end,
                                                  Pageable pageable);
 }

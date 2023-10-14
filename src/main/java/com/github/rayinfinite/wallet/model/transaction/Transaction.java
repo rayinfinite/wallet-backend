@@ -1,5 +1,6 @@
 package com.github.rayinfinite.wallet.model.transaction;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.github.rayinfinite.wallet.model.account.Account;
 import com.github.rayinfinite.wallet.model.book.Book;
 import jakarta.persistence.*;
@@ -7,7 +8,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import jakarta.persistence.Index;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -24,8 +24,10 @@ public class Transaction {
     @NotNull
     private Long amount;
 
+    @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Account account;
+    @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Book book;
 
@@ -37,6 +39,8 @@ public class Transaction {
     private Boolean deleted = false;
     @Column(nullable = false)
     private Boolean disabled = false;
+
+    private String notes;
 
     //https://docs.jboss.org/hibernate/orm/6.2/userguide/html_single/Hibernate_User_Guide.html#basic-mapping-json
     @JdbcTypeCode(SqlTypes.JSON)

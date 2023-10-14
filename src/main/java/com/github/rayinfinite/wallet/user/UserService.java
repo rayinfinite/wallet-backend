@@ -5,9 +5,9 @@ import com.github.rayinfinite.wallet.book.BookService;
 import com.github.rayinfinite.wallet.exception.DefaultException;
 import com.github.rayinfinite.wallet.model.CurrentSession;
 import com.github.rayinfinite.wallet.model.account.Account;
-import com.github.rayinfinite.wallet.model.account.dto.AddAccount;
+import com.github.rayinfinite.wallet.model.account.AddAccount;
 import com.github.rayinfinite.wallet.model.book.Book;
-import com.github.rayinfinite.wallet.model.book.dto.AddBook;
+import com.github.rayinfinite.wallet.model.book.AddBook;
 import com.github.rayinfinite.wallet.model.user.User;
 import com.github.rayinfinite.wallet.model.user.dto.*;
 import jakarta.transaction.Transactional;
@@ -35,6 +35,8 @@ public class UserService {
             throw new DefaultException("User login wrong Password");
         }
         currentSession.setUser(user);
+        currentSession.setBook(bookService.get(user.getDefaultBook()));
+        System.out.println(currentSession.getBook());
         return user;
     }
 
@@ -53,14 +55,14 @@ public class UserService {
         User saved=userRepository.save(user);
         currentSession.setUser(saved);
 
-        Book book=bookService.add(new AddBook("default", "Default Book",false,0L));
-        user.setDefaultBook(book);
+        Book book=bookService.add(new AddBook("default", "Default Book"));
+        user.setDefaultBook(book.getId());
         currentSession.setBook(book);
 
         Account account=accountService.add(new AddAccount("Cash", "Default Account"));
-        book = bookService.setDefaultAccount(account);
+        book = bookService.setDefaultAccount(account.getId());
 
-        return setDefaultBook(book);
+        return setDefaultBook(book.getId());
     }
 
     public void changePassword(@NotNull ChangePassword changePassword) {
@@ -94,9 +96,19 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public User setDefaultBook(Book book){
+    public User get(long id){
+        User user=userRepository.findById(id).orElse(null);
+        if(user==null){
+            throw new DefaultException("User not found");
+        }
+        currentSession.setUser(user);
+        currentSession.setBook(bookService.get(user.getDefaultBook()));
+        return user;
+    }
+
+    public User setDefaultBook(long defaultBook){
         User user=currentSession.getUser();
-        user.setDefaultBook(book);
+        user.setDefaultBook(defaultBook);
         return userRepository.save(user);
     }
 }

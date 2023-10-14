@@ -1,6 +1,5 @@
 package com.github.rayinfinite.wallet.model.user;
 
-import com.github.rayinfinite.wallet.model.book.Book;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -34,6 +33,5 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime registerTime = LocalDateTime.now();
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private Book defaultBook;
+    private long defaultBook;
 }
