@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/category")
-@Tag(name = "Category")
+@Tag(name = "category")
 public class CategoryController {
     private final CategoryService categoryService;
 

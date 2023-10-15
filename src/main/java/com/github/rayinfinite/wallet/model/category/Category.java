@@ -1,5 +1,6 @@
 package com.github.rayinfinite.wallet.model.category;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.rayinfinite.wallet.model.book.Book;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,10 +18,10 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 50, nullable = false)
     private String name;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 50, nullable = false)
     private String icon;
 
     private int type;
@@ -28,12 +29,14 @@ public class Category {
     @OneToMany
     private List<Category> child;
 
+    @JsonIgnore
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Book book;
 
-    public Category(String name,String icon,int type){
+    public Category(String name,String icon,int type,Book book){
         this.name=name;
         this.icon=icon;
         this.type=type;
+        this.book=book;
     }
 }

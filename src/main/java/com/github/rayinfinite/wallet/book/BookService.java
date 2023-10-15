@@ -1,9 +1,13 @@
 package com.github.rayinfinite.wallet.book;
 
 import com.github.rayinfinite.wallet.UserBookRelation.UserBookRelationService;
+import com.github.rayinfinite.wallet.account.AccountService;
+import com.github.rayinfinite.wallet.category.CategoryService;
 import com.github.rayinfinite.wallet.exception.DefaultException;
 import com.github.rayinfinite.wallet.model.CurrentSession;
 import com.github.rayinfinite.wallet.model.UserBookRelation;
+import com.github.rayinfinite.wallet.model.account.Account;
+import com.github.rayinfinite.wallet.model.account.AddAccount;
 import com.github.rayinfinite.wallet.model.book.Book;
 import com.github.rayinfinite.wallet.model.book.AddBook;
 import com.github.rayinfinite.wallet.model.user.User;
@@ -20,6 +24,8 @@ public class BookService {
     private final BookRepository bookRepository;
     private final CurrentSession currentSession;
     private final UserBookRelationService userBookRelationService;
+    private final AccountService accountService;
+    private final CategoryService categoryService;
 
     @Transactional
     public Book add(AddBook addBook) {
@@ -28,7 +34,10 @@ public class BookService {
         book.setUserId(currentSession.getUser().getId());
         Book saved = bookRepository.save(book);
         userBookRelationService.add(currentSession.getUser(), saved, 0);
-        return saved;
+        currentSession.setBook(saved);
+        Account account=accountService.add(new AddAccount("Cash", "Default Account"));
+        categoryService.init();
+        return setDefaultAccount(account.getId());
     }
 
     @Transactional

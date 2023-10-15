@@ -3,6 +3,7 @@ package com.github.rayinfinite.wallet.model.transaction;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.github.rayinfinite.wallet.model.account.Account;
 import com.github.rayinfinite.wallet.model.book.Book;
+import com.github.rayinfinite.wallet.model.category.Category;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -20,10 +21,10 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    private Long categoryId;
-    @NotNull
     private Long amount;
 
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Category category;
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Account account;
