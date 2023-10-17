@@ -10,6 +10,7 @@ import lombok.Data;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +22,8 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    private Long amount;
+    @Column(precision = 20, scale = 4)
+    private BigDecimal amount;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Category category;

@@ -7,6 +7,7 @@ import com.github.rayinfinite.wallet.model.book.Book;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,11 +27,24 @@ public class Account {
     private Boolean deleted = false;
     private Boolean disabled = false;
 
-    private long income = 0;
-    private long expense = 0;
-    private long balance = 0;
+    @Column(precision = 20, scale = 4)
+    private BigDecimal income = BigDecimal.ZERO;
+    @Column(precision = 20, scale = 4)
+    private BigDecimal expense = BigDecimal.ZERO;
+    @Column(precision = 20, scale = 4)
+    private BigDecimal balance = BigDecimal.ZERO;
 
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Book book;
+
+    public void expense(BigDecimal amount) {
+        this.expense = this.expense.add(amount);
+        this.balance = this.balance.subtract(amount);
+    }
+
+    public void income(BigDecimal amount) {
+        this.income = this.income.add(amount);
+        this.balance = this.balance.add(amount);
+    }
 }

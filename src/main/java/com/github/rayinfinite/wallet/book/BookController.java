@@ -1,6 +1,7 @@
 package com.github.rayinfinite.wallet.book;
 
 import com.github.rayinfinite.wallet.model.BaseResponse;
+import com.github.rayinfinite.wallet.model.ChartVO;
 import com.github.rayinfinite.wallet.model.book.Book;
 import com.github.rayinfinite.wallet.model.book.AddBook;
 import com.github.rayinfinite.wallet.model.user.User;
@@ -9,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,6 +19,7 @@ import java.util.List;
 @Tag(name = "Book")
 public class BookController {
     private final BookService bookService;
+    private final ReportService reportService;
 
     @Operation(description = "Get book", operationId = "getBook")
     @GetMapping("/{id}")
@@ -56,5 +59,29 @@ public class BookController {
     @PostMapping("/user")
     public BaseResponse<List<User>> getUser(Book book) {
         return BaseResponse.success(bookService.getUser(book));
+    }
+
+    @Operation(description = "Book Overview")
+    @GetMapping("/overview")
+    public BaseResponse<BigDecimal[]> overview(){
+        return BaseResponse.success(reportService.overview());
+    }
+
+    @Operation(description = "Report Balance")
+    @GetMapping("/reportBalance")
+    public BaseResponse<List<List<ChartVO>>> reportBalance(){
+        return BaseResponse.success(reportService.reportBalance());
+    }
+
+    @Operation(description = "Report Expense Category")
+    @GetMapping("/reportExpenseCategory")
+    public BaseResponse<List<ChartVO>> reportExpenseCategory(){
+        return BaseResponse.success(reportService.reportExpenseCategory());
+    }
+
+    @Operation(description = "Report Income Category")
+    @GetMapping("/reportIncomeCategory")
+    public BaseResponse<List<ChartVO>> reportIncomeCategory(){
+        return BaseResponse.success(reportService.reportIncomeCategory());
     }
 }

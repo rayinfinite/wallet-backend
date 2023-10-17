@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,9 +16,9 @@ public class AddAccount {
     private Boolean deleted = false;
     private Boolean disabled = false;
 
-    private long income = 0;
-    private long expense = 0;
-    private long balance = 0;
+    private BigDecimal income = BigDecimal.ZERO;
+    private BigDecimal expense = BigDecimal.ZERO;
+    private BigDecimal balance = BigDecimal.ZERO;
 
     public AddAccount(String name,String description){
         this.name=name;

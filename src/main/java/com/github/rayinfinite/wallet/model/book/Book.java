@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,9 +25,22 @@ public class Book {
     private Boolean deleted = false;
     private Boolean disabled = false;
 
-    private long income = 0;
-    private long expense = 0;
-    private long balance = 0;
+    @Column(precision = 20, scale = 4)
+    private BigDecimal income = BigDecimal.ZERO;
+    @Column(precision = 20, scale = 4)
+    private BigDecimal expense = BigDecimal.ZERO;
+    @Column(precision = 20, scale = 4)
+    private BigDecimal balance = BigDecimal.ZERO;
 
     private long defaultAccount;
+
+    public void expense(BigDecimal amount) {
+        this.expense = this.expense.add(amount);
+        this.balance = this.balance.subtract(amount);
+    }
+
+    public void income(BigDecimal amount) {
+        this.income = this.income.add(amount);
+        this.balance = this.balance.add(amount);
+    }
 }

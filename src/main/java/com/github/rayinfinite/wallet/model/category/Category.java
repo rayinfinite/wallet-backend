@@ -23,20 +23,22 @@ public class Category {
 
     @Column(length = 50, nullable = false)
     private String icon;
-
+    /**
+     * 0:expense,1:income,2:transfer
+     */
     private int type;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Category> child;
 
     @JsonIgnore
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Book book;
 
-    public Category(String name,String icon,int type,Book book){
-        this.name=name;
-        this.icon=icon;
-        this.type=type;
-        this.book=book;
+    public Category(String name, String icon, int type, Book book) {
+        this.name = name;
+        this.icon = icon;
+        this.type = type;
+        this.book = book;
     }
 }

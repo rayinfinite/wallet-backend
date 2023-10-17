@@ -1,11 +1,14 @@
 package com.github.rayinfinite.wallet.transaction;
 
 import com.github.rayinfinite.wallet.account.AccountService;
+import com.github.rayinfinite.wallet.book.BookService;
+import com.github.rayinfinite.wallet.category.CategoryService;
 import com.github.rayinfinite.wallet.model.CurrentSession;
 import com.github.rayinfinite.wallet.model.account.Account;
 import com.github.rayinfinite.wallet.model.book.Book;
-import com.github.rayinfinite.wallet.model.transaction.Transaction;
+import com.github.rayinfinite.wallet.model.category.Category;
 import com.github.rayinfinite.wallet.model.transaction.AddTransaction;
+import com.github.rayinfinite.wallet.model.transaction.Transaction;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -15,13 +18,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 @RequiredArgsConstructor
 public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final AccountService accountService;
+    private final CategoryService categoryService;
     private final CurrentSession currentSession;
+    private final BookService bookService;
 
     public Transaction get(Long id) {
         Transaction transaction = transactionRepository.findById(id).orElse(null);
@@ -40,10 +46,26 @@ public class TransactionService {
         checkAccount(account);
         Transaction transaction = new Transaction();
         BeanUtils.copyProperties(addTransaction, transaction);
-        transaction.setBook(currentSession.getBook());
+        transaction.setTime(LocalDateTime.parse(addTransaction.getTime(), DateTimeFormatter.ISO_DATE_TIME));
+        Book book = currentSession.getBook();
+        transaction.setBook(book);
         transaction.setAccount(account);
+
+        Category category = categoryService.get(addTransaction.getCategoryId());
+        transaction.setCategory(category);
 //        Map<String, Object> details = new HashMap<>();
 //        transaction.setDetails(details);
+        transactionRepository.save(transaction);
+        if (category.getType() == 0) {
+            account.expense(transaction.getAmount());
+            book.expense(transaction.getAmount());
+        } else {
+            account.income(transaction.getAmount());
+            book.income(transaction.getAmount());
+        }
+        accountService.save(account);
+        bookService.save(book);
+        currentSession.setBook(book);
     }
 
     /**
@@ -53,24 +75,24 @@ public class TransactionService {
      */
     @Transactional
     public void update(long id, AddTransaction addTransaction) {
-        Transaction Transaction = get(id);
+        Transaction transaction = get(id);
         Account account = accountService.get(addTransaction.getAccountId());
         Book book = checkAccount(account);
-        if (!book.equals(Transaction.getBook())) {
+        if (!book.equals(transaction.getBook())) {
             throw new RuntimeException("Book has been changed");
         }
-        BeanUtils.copyProperties(addTransaction, Transaction);
-        Transaction.setUpdateTime(LocalDateTime.now());
-        transactionRepository.save(Transaction);
+        BeanUtils.copyProperties(addTransaction, transaction);
+        transaction.setUpdateTime(LocalDateTime.now());
+        transactionRepository.save(transaction);
     }
 
     @Transactional
     public void delete(Long id) {
-        Transaction Transaction = transactionRepository.findById(id).orElse(null);
-        if (Transaction == null) {
-            throw new RuntimeException("Transaction not found");
+        Transaction transaction = transactionRepository.findById(id).orElse(null);
+        if (transaction == null) {
+            throw new RuntimeException("transaction not found");
         }
-        if (!currentSession.getBook().equals(Transaction.getBook())) {
+        if (!currentSession.getBook().equals(transaction.getBook())) {
             throw new RuntimeException("No Authority");
         }
         transactionRepository.deleteById(id);
@@ -88,7 +110,6 @@ public class TransactionService {
         Pageable pageable = PageRequest.of(page, size);
         return transactionRepository.findByBookIdAndTimeBetween(book.getId(), from, end, pageable);
     }
-
 
     public Book checkAccount(Account account) {
         if (account == null) {
