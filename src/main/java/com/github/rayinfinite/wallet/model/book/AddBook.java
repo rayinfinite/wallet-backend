@@ -1,24 +1,15 @@
 package com.github.rayinfinite.wallet.model.book;
 
+import com.github.rayinfinite.wallet.model.base.AddBaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
-@NoArgsConstructor
-public class AddBook {
-    private String name;
-    private String description;
-    private Boolean disabled = false;
-    private BigDecimal income = BigDecimal.ZERO;
-    private BigDecimal expense = BigDecimal.ZERO;
-    private BigDecimal balance = BigDecimal.ZERO;
-
+public class AddBook extends AddBaseEntity {
     public AddBook(String name,String description){
-        this.name=name;
-        this.description=description;
+        super(name,description);
     }
 }

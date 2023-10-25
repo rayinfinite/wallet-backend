@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -59,5 +60,9 @@ public class AccountService {
             return accountRepository.findByBookId(currentSession.getBook().getId(), pageable);
         }
         return accountRepository.findByNameContainingAndBookId(keyword, currentSession.getBook().getId(), pageable);
+    }
+
+    public List<Account> getAll() {
+        return accountRepository.findByBookId(currentSession.getBook().getId());
     }
 }

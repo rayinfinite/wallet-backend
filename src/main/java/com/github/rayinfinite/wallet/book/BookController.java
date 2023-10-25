@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/book")
-@Tag(name = "Book")
+@Tag(name = "book")
 public class BookController {
     private final BookService bookService;
     private final ReportService reportService;
@@ -63,7 +63,7 @@ public class BookController {
 
     @Operation(description = "Book Overview")
     @GetMapping("/overview")
-    public BaseResponse<BigDecimal[]> overview(){
+    public BaseResponse<List<BigDecimal>> overview(){
         return BaseResponse.success(reportService.overview());
     }
 

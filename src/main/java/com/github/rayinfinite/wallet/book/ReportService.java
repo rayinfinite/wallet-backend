@@ -20,15 +20,17 @@ public class ReportService {
     private final TransactionService transactionService;
     private final BookService bookService;
 
-    public BigDecimal[] overview() {
+    public List<BigDecimal> overview() {
         List<Book> list = bookService.list();
-        BigDecimal[] overview = new BigDecimal[]{BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO};
-        list.forEach(book -> {
-            overview[0] = overview[0].add(book.getIncome());
-            overview[1] = overview[1].add(book.getExpense());
-            overview[2] = overview[2].add(book.getBalance());
-        });
-        return overview;
+        BigDecimal totalIncome = BigDecimal.ZERO;
+        BigDecimal totalExpense = BigDecimal.ZERO;
+        BigDecimal totalBalance = BigDecimal.ZERO;
+        for (Book book : list) {
+            totalIncome = totalIncome.add(book.getIncome());
+            totalExpense = totalExpense.add(book.getExpense());
+            totalBalance = totalBalance.add(book.getBalance());
+        }
+        return List.of(totalIncome, totalExpense, totalBalance);
     }
 
     public List<List<ChartVO>> reportBalance() {

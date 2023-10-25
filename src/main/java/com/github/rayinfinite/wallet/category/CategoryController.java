@@ -45,9 +45,9 @@ public class CategoryController {
         return BaseResponse.success("Update successfully");
     }
 
-    @Operation(description = "Get category page", operationId = "getCategoryPage")
-    @GetMapping("/list")
-    public BaseResponse<List<Category>> list() {
+    @Operation(description = "Get all category", operationId = "getAllCategory")
+    @GetMapping("/")
+    public BaseResponse<List<Category>> getAll() {
         return BaseResponse.success(categoryService.list());
     }
 

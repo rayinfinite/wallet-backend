@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/account")
@@ -50,5 +52,11 @@ public class AccountController {
     public BaseResponse<Page<Account>> getPage(String name, int current, int pageSize) {
         Page<Account> account= accountService.getPage(name, current, pageSize);
         return BaseResponse.success(account);
+    }
+
+    @Operation(description = "Get all account", operationId = "getAllAccount")
+    @GetMapping("/")
+    public BaseResponse<List<Account>> getAll() {
+        return BaseResponse.success(accountService.getAll());
     }
 }
