@@ -51,7 +51,7 @@ public class UserService {
         User saved=userRepository.save(user);
         currentSession.setUser(saved);
 
-        Book book=bookService.add(new AddBook("default", "Default Book"));
+        Book book=bookService.add(new AddBook("Default", "Default Book"));
         return setDefaultBook(book.getId());
     }
 

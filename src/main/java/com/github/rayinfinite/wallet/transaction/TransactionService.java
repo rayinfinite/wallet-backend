@@ -100,14 +100,14 @@ public class TransactionService {
 
     public Page<Transaction> getPage(int page, int size) {
         Book book = currentSession.getBook();
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page - 1, size);
         return transactionRepository.findByBookId(book.getId(), pageable);
 
     }
 
     public Page<Transaction> getPage(int page, int size, LocalDateTime from, LocalDateTime end) {
         Book book = currentSession.getBook();
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page - 1, size);
         return transactionRepository.findByBookIdAndTimeBetween(book.getId(), from, end, pageable);
     }
 
