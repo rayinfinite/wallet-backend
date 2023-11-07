@@ -49,7 +49,7 @@ public class ReportService {
 
     public List<ChartVO> reportCategory(int type) {
         List<ChartVO> result = new ArrayList<>();
-        Page<Transaction> page = transactionService.getPage(0, 100000);
+        Page<Transaction> page = transactionService.getPage(1, 100000);
         page.forEach(transaction -> {
             if (transaction.getCategory().getType() == type) {
                 result.add(new ChartVO(transaction.getCategory().getName(), transaction.getAmount().abs()));
