@@ -96,8 +96,16 @@ public class UserService {
         return user;
     }
 
+    @Transactional
     public User setDefaultBook(long defaultBook){
         User user=currentSession.getUser();
+        Book book=bookService.get(defaultBook);
+        if(book==null){
+            throw new DefaultException("Book not found");
+        }
+        if(!book.getUserId().equals(user.getId())){
+            throw new DefaultException("No permission");
+        }
         user.setDefaultBook(defaultBook);
         return userRepository.save(user);
     }
