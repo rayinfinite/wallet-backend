@@ -52,6 +52,7 @@ public class UserService {
         currentSession.setUser(saved);
 
         Book book=bookService.add(new AddBook("Default", "Default Book"));
+        currentSession.setBook(book);
         return setDefaultBook(book.getId());
     }
 
