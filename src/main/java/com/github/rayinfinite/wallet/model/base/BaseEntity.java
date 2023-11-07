@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Data
 @MappedSuperclass
@@ -36,5 +37,17 @@ public abstract class BaseEntity {
     public void income(BigDecimal amount) {
         this.income = this.income.add(amount);
         this.balance = this.balance.add(amount);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BaseEntity baseEntity)) return false;
+        return Objects.equals(getId(), baseEntity.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
