@@ -1,9 +1,9 @@
-name: Spring Boot Maven Build and Test
+name: Test Dev Branch
 
 on:
   pull_request:
     branches:
-      - main # 你的主分支名称
+      - dev
 
 jobs:
   build:
