@@ -116,5 +116,7 @@ public class UserService {
             throw new DefaultException("No permission");
         }
         currentSession.setBook(book);
+        user.setDefaultBook(bookId);
+        currentSession.setUser(user);
     }
 }
