@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/account")
-@Tag(name = "Account")
+@Tag(name = "account")
 public class AccountController {
     private final AccountService accountService;
 

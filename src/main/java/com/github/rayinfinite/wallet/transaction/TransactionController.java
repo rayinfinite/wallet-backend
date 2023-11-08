@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/transaction")
-@Tag(name = "Transaction")
+@Tag(name = "transaction")
 public class TransactionController {
     private final TransactionService transactionService;
 

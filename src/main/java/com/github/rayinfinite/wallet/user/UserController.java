@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/user")
-@Tag(name = "User")
+@Tag(name = "user")
 public class UserController {
     private final UserService userService;
 
@@ -33,6 +33,13 @@ public class UserController {
     @GetMapping("/setDefaultBook/{id}")
     public BaseResponse<String> setDefaultBook(@PathVariable("id") long id) {
         userService.setDefaultBook(id);
+        return BaseResponse.success("Set default book successfully");
+    }
+
+    @Operation(description = "Set book")
+    @GetMapping("/setBook/{id}")
+    public BaseResponse<String> setBook(@PathVariable("id") long id) {
+        userService.setBook(id);
         return BaseResponse.success("Set default book successfully");
     }
 }
