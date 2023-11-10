@@ -25,7 +25,7 @@ public class User {
     private String avatar;
 
     @Column(length = 16)
-    private String telephone;
+    private String phone;
 
     @Column(length = 64)
     private String email;

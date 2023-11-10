@@ -12,4 +12,5 @@ public class Login implements Serializable {
     @NotBlank(message = "请输入密码")
     private String password;
     private Boolean autoLogin;
+    private int loginType=0;
 }
