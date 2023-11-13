@@ -55,7 +55,7 @@ class LoginControllerDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         when(userService.login(Mockito.any())).thenReturn(user);
         when(jwtConfig.createToken(Mockito.<Long>any())).thenReturn("ABC123");
@@ -88,7 +88,7 @@ class LoginControllerDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         when(userService.register(Mockito.any())).thenReturn(user);
         when(jwtConfig.createToken(Mockito.<Long>any())).thenReturn("ABC123");
@@ -97,7 +97,7 @@ class LoginControllerDiffblueTest {
         addUser.setEmail("jane.doe@example.org");
         addUser.setNickName("Nick Name");
         addUser.setPassword("iloveyou");
-        addUser.setTelephone("6625550144");
+        addUser.setPhone("6625550144");
         addUser.setUsername("janedoe");
         String content = (new ObjectMapper()).writeValueAsString(addUser);
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/login/register")
@@ -122,7 +122,7 @@ class LoginControllerDiffblueTest {
         forgetPassword.setEmail("jane.doe@example.org");
         forgetPassword.setNewPassword("iloveyou");
         forgetPassword.setNickName("Nick Name");
-        forgetPassword.setTelephone("6625550144");
+        forgetPassword.setPhone("6625550144");
         forgetPassword.setUsername("janedoe");
         String content = (new ObjectMapper()).writeValueAsString(forgetPassword);
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/login/forget")
@@ -150,7 +150,7 @@ class LoginControllerDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         when(userService.CurrentUser()).thenReturn(user);
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/login/current");
@@ -162,7 +162,7 @@ class LoginControllerDiffblueTest {
                 .andExpect(MockMvcResultMatchers.content()
                         .string(
                                 "{\"code\":0,\"data\":{\"id\":1,\"username\":\"janedoe\",\"password\":\"iloveyou\",\"nickName\":\"Nick Name\",\"avatar\":"
-                                        + "\"Avatar\",\"telephone\":\"6625550144\",\"email\":\"jane.doe@example.org\",\"registerTime\":[1970,1,1,0,0],"
+                                        + "\"Avatar\",\"phone\":\"6625550144\",\"email\":\"jane.doe@example.org\",\"registerTime\":[1970,1,1,0,0],"
                                         + "\"defaultBook\":1},\"message\":\"ok\"}"));
     }
 

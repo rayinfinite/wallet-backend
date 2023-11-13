@@ -18,7 +18,7 @@ public class AddUser {
     private String nickName;
 
     @Length(max = 16, message = "手机号长度小于11位")
-    private String telephone;
+    private String phone;
 
     @Length(max = 64, message = "邮箱长度小于64位")
     private String email;

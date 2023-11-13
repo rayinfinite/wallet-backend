@@ -7,6 +7,8 @@ import com.github.rayinfinite.wallet.model.book.Book;
 import com.github.rayinfinite.wallet.model.book.AddBook;
 import com.github.rayinfinite.wallet.model.user.User;
 import com.github.rayinfinite.wallet.model.user.dto.*;
+import com.github.rayinfinite.wallet.user.factory.LoginService;
+import com.github.rayinfinite.wallet.user.factory.LoginServiceFactory;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +23,11 @@ public class UserService {
     private final BookService bookService;
     private final PasswordEncoder PasswordEncoder;
     private final CurrentSession currentSession;
+    private final LoginServiceFactory loginServiceFactory;
 
     public User login(@NotNull Login login) {
-        User user = userRepository.findOneByUsername(login.getUsername()).orElse(null);
+        LoginService loginService = loginServiceFactory.getLoginService(login.getLoginType());
+        User user= loginService.login(login);
         if (user == null) {
             throw new DefaultException("User not found");
         }

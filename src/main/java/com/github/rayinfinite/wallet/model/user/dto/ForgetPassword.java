@@ -15,12 +15,12 @@ public class ForgetPassword {
     private String username;
 
     private String nickName;
-    private String telephone;
+    private String phone;
     private String email;
 
     public boolean validate(User user) {
         return user.getNickName().equals(nickName) &&
-                user.getTelephone().equals(telephone) &&
+                user.getPhone().equals(phone) &&
                 user.getEmail().equals(email);
     }
 }
