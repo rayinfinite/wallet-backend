@@ -63,7 +63,7 @@ class BookServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
 
         Book book2 = getBook();
@@ -81,7 +81,7 @@ class BookServiceDiffblueTest {
         user2.setNickName("Nick Name");
         user2.setPassword("iloveyou");
         user2.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user2.setTelephone("6625550144");
+        user2.setPhone("6625550144");
         user2.setUsername("janedoe");
 
         UserBookRelation userBookRelation = new UserBookRelation();
@@ -150,7 +150,7 @@ class BookServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         doNothing().when(currentSession).setBook(Mockito.any());
         when(currentSession.getUser()).thenReturn(user);
@@ -165,7 +165,7 @@ class BookServiceDiffblueTest {
         user2.setNickName("Nick Name");
         user2.setPassword("iloveyou");
         user2.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user2.setTelephone("6625550144");
+        user2.setPhone("6625550144");
         user2.setUsername("janedoe");
 
         UserBookRelation userBookRelation = new UserBookRelation();
@@ -217,7 +217,7 @@ class BookServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         Book book2 = mock(Book.class);
         doNothing().when(book2).setBalance(Mockito.any());
@@ -258,7 +258,7 @@ class BookServiceDiffblueTest {
         user2.setNickName("Nick Name");
         user2.setPassword("iloveyou");
         user2.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user2.setTelephone("6625550144");
+        user2.setPhone("6625550144");
         user2.setUsername("janedoe");
 
         UserBookRelation userBookRelation = new UserBookRelation();
@@ -325,7 +325,7 @@ class BookServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         when(currentSession.getUser()).thenReturn(user);
 
@@ -339,7 +339,7 @@ class BookServiceDiffblueTest {
         user2.setNickName("Nick Name");
         user2.setPassword("iloveyou");
         user2.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user2.setTelephone("6625550144");
+        user2.setPhone("6625550144");
         user2.setUsername("janedoe");
 
         UserBookRelation userBookRelation = new UserBookRelation();
@@ -375,7 +375,7 @@ class BookServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         when(currentSession.getUser()).thenReturn(user);
 
@@ -389,7 +389,7 @@ class BookServiceDiffblueTest {
         user2.setNickName("Nick Name");
         user2.setPassword("iloveyou");
         user2.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user2.setTelephone("6625550144");
+        user2.setPhone("6625550144");
         user2.setUsername("janedoe");
 
         UserBookRelation userBookRelation = new UserBookRelation();
@@ -439,7 +439,7 @@ class BookServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         when(currentSession.getUser()).thenReturn(user);
 
@@ -453,7 +453,7 @@ class BookServiceDiffblueTest {
         user2.setNickName("Nick Name");
         user2.setPassword("iloveyou");
         user2.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user2.setTelephone("6625550144");
+        user2.setPhone("6625550144");
         user2.setUsername("janedoe");
 
         UserBookRelation userBookRelation = new UserBookRelation();
@@ -488,7 +488,7 @@ class BookServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         when(currentSession.getUser()).thenReturn(user);
 
@@ -502,7 +502,7 @@ class BookServiceDiffblueTest {
         user2.setNickName("Nick Name");
         user2.setPassword("iloveyou");
         user2.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user2.setTelephone("6625550144");
+        user2.setPhone("6625550144");
         user2.setUsername("janedoe");
 
         UserBookRelation userBookRelation = new UserBookRelation();
@@ -587,7 +587,7 @@ class BookServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         when(currentSession.getUser()).thenReturn(user);
 
@@ -601,7 +601,7 @@ class BookServiceDiffblueTest {
         user2.setNickName("Nick Name");
         user2.setPassword("iloveyou");
         user2.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user2.setTelephone("6625550144");
+        user2.setPhone("6625550144");
         user2.setUsername("janedoe");
 
         UserBookRelation userBookRelation = new UserBookRelation();
@@ -634,7 +634,7 @@ class BookServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         when(currentSession.getUser()).thenReturn(user);
         when(userBookRelationService.findByUserAndBook(Mockito.any(), Mockito.any()))
@@ -673,7 +673,7 @@ class BookServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         when(currentSession.getUser()).thenReturn(user);
 
@@ -687,7 +687,7 @@ class BookServiceDiffblueTest {
         user2.setNickName("Nick Name");
         user2.setPassword("iloveyou");
         user2.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user2.setTelephone("6625550144");
+        user2.setPhone("6625550144");
         user2.setUsername("janedoe");
 
         UserBookRelation userBookRelation = new UserBookRelation();
@@ -720,7 +720,7 @@ class BookServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         when(currentSession.getUser()).thenReturn(user);
         when(userBookRelationService.findByUserAndBook(Mockito.any(), Mockito.any()))
@@ -834,7 +834,7 @@ class BookServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         when(currentSession.getUser()).thenReturn(user);
         when(userBookRelationService.findByUser(Mockito.any())).thenReturn(new ArrayList<>());
@@ -856,7 +856,7 @@ class BookServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         when(currentSession.getUser()).thenReturn(user);
         when(userBookRelationService.findByUser(Mockito.any()))

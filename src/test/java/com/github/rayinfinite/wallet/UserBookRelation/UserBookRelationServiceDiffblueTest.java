@@ -93,13 +93,13 @@ class UserBookRelationServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         userBookRelationService.deleteByUser(user);
         verify(userBookRelationRepository).deleteByUser(Mockito.any());
         assertEquals("Avatar", user.getAvatar());
         assertEquals("janedoe", user.getUsername());
-        assertEquals("6625550144", user.getTelephone());
+        assertEquals("6625550144", user.getPhone());
         assertEquals("iloveyou", user.getPassword());
         assertEquals("00:00", user.getRegisterTime().toLocalTime().toString());
         assertEquals("Nick Name", user.getNickName());
@@ -123,7 +123,7 @@ class UserBookRelationServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
 
         UserBookRelation userBookRelation = new UserBookRelation();
@@ -141,7 +141,7 @@ class UserBookRelationServiceDiffblueTest {
         user2.setNickName("Nick Name");
         user2.setPassword("iloveyou");
         user2.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user2.setTelephone("6625550144");
+        user2.setPhone("6625550144");
         user2.setUsername("janedoe");
 
         Book book2 = getBook();
@@ -165,7 +165,7 @@ class UserBookRelationServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         List<UserBookRelation> actualFindByUserResult = userBookRelationService.findByUser(user);
         assertSame(userBookRelationList, actualFindByUserResult);
@@ -205,7 +205,7 @@ class UserBookRelationServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
         List<UserBookRelation> actualFindByUserAndRoleResult = userBookRelationService.findByUserAndRole(user, 1);
         assertSame(userBookRelationList, actualFindByUserAndRoleResult);
@@ -228,7 +228,7 @@ class UserBookRelationServiceDiffblueTest {
         user.setNickName("Nick Name");
         user.setPassword("iloveyou");
         user.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user.setTelephone("6625550144");
+        user.setPhone("6625550144");
         user.setUsername("janedoe");
 
         UserBookRelation userBookRelation = new UserBookRelation();
@@ -247,7 +247,7 @@ class UserBookRelationServiceDiffblueTest {
         user2.setNickName("Nick Name");
         user2.setPassword("iloveyou");
         user2.setRegisterTime(LocalDate.of(1970, 1, 1).atStartOfDay());
-        user2.setTelephone("6625550144");
+        user2.setPhone("6625550144");
         user2.setUsername("janedoe");
 
         Book book2 = getBook();
